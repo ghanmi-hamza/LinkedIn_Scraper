@@ -14,20 +14,6 @@ from selenium.webdriver.firefox.options import Options
 #mettre le path de votre chromedriver
 
 
-def get_browser(url,usr,pwd):
-    options = webdriver.firefox.options.Options()
-    options.headless = True
-    driver = webdriver.Firefox(executable_path=r"C:\Users\Hamza\Downloads\geckodriver.exe", options=options)
-    #driver = webdriver.Chrome(executable_path=r"C:\Users\Hamza\Downloads\chromedriver.exe")
-    driver.get("https://twitter.com/login")
-    time.sleep(2)
-    email = driver.find_element_by_name('session[username_or_email]')
-    email.send_keys(usr)
-    password = driver.find_element_by_name('session[password]')
-    password.send_keys(pwd)
-    password.send_keys(Keys.ENTER)
-    return(driver)
-
 def save_data(data,name,folder_path):
     """save data in a specific folder path with the name as argument"""
     try:
