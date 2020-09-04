@@ -4,11 +4,11 @@ import setuptools
 
 
 
-#with open("README.md", "r", encoding="utf-8") as readme_file:
-#    readme = readme_file.read()
+with open("README.md", "r", encoding="utf-8") as readme_file:
+    readme = readme_file.read()
 
 setuptools.setup(
-    name="Twitter-crawler",
+    name="twitterCrawler",
     version = "1.0.0",
     author="Hamza Ghanmi",
     author_email="hamza.ghanmi56@gmail.com",
@@ -19,7 +19,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3.8",
-        "Operating System :: Windows",
+        "Operating System :: OS Independent",
     ],
     python_requires=">=3.5",
     install_requires=["selenium==3.141.0","webdriver_manager"],

@@ -1,0 +1,11 @@
+README.md
+setup.py
+twitterCrawler/__init__.py
+twitterCrawler/__main__.py
+twitterCrawler/functions.py
+twitterCrawler/myClass.py
+twitterCrawler.egg-info/PKG-INFO
+twitterCrawler.egg-info/SOURCES.txt
+twitterCrawler.egg-info/dependency_links.txt
+twitterCrawler.egg-info/requires.txt
+twitterCrawler.egg-info/top_level.txt
