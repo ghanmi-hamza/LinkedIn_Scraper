@@ -17,7 +17,7 @@ class Driver(ABC):
     def get_user_info(self,driver,url):
         pass
     
-    def get_publications(self,user_id,n,comments):
+    def get_publications(self,user_id,nb_tweets,nb_comments,scroll,comments):
         pass
     
     def get_comment_by_publication(self,publication_id,n,scroll):
@@ -28,7 +28,15 @@ class Driver(ABC):
     
     def get_comment_by_keys(self,keys,n,scroll):
         pass
+    
+    def get_images(self,user_id,scroll,nb_images):
+        pass
 
+    def get_followers(self,user_id,scroll):
+        pass
+
+    def get_following(self,user_id,scroll):
+        pass
 
 class TwitterDriver(Driver):
     def __init__(self,driver=''):
@@ -37,7 +45,7 @@ class TwitterDriver(Driver):
         pass
     def get_browser(self,usr,pwd):
         options = webdriver.firefox.options.Options()
-        #options.headless = True
+        options.headless = True
         self.driver = webdriver.Firefox(executable_path=r"C:\Users\Hamza\Downloads\geckodriver.exe", options=options)
         self.driver.set_window_position(0, 0) #NOTE: 0,0 might fail on some systems
         self.driver.maximize_window()
@@ -51,7 +59,7 @@ class TwitterDriver(Driver):
    
         
     def get_user_info(self,user_id):
-        """function that takes the url of the user and return some info about it"""
+        """function that takes the user id and return info about it"""
         self.driver.get("https://twitter.com/"+str(user_id))
         WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.XPATH, ".//div[@class='css-901oao r-hkyrab r-1qd0xha r-1b6yd1w r-1vr29t4 r-ad9z0x r-bcqeeo r-qvutc0']")))
         #c=self.driver.find_element_by_xpath(".//div[@class='css-1dbjc4n r-1habvwh']").text
@@ -75,7 +83,7 @@ class TwitterDriver(Driver):
         self.user_info=dic
         return(dic)
 
-    def get_pub(self,user_id,nb_tweets,nb_comments,scroll,comments):
+    def get_publication(self,user_id,nb_tweets,nb_comments,scroll,comments):
         
         self.driver.get("https://twitter.com/"+str(user_id))
         WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.XPATH, ".//div[@class='css-1dbjc4n r-18u37iz r-1wtj0ep r-156q2ks r-1mdbhws']")))
@@ -151,7 +159,6 @@ class TwitterDriver(Driver):
                     pass
                 try:
                     self.driver.find_element_by_xpath(".//div[@class ='css-18t94o4 css-1dbjc4n r-1ny4l3l r-1j3t67a r-atwnbb r-o7ynqc r-6416eg']").click()
-                    #time.sleep(1)
                 except:
                     pass
                 a=self.driver.find_elements_by_xpath(".//article[contains(@class ,'css-1dbjc4n r-1loqt21')]")
@@ -179,22 +186,20 @@ class TwitterDriver(Driver):
         li=[]
         WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.XPATH, ".//article[@class ='css-1dbjc4n r-18u37iz r-1ny4l3l']")))
         for i in range(scroll):
+            time.sleep(1)
             try:
                 self.driver.find_element_by_xpath(".//div[@class ='css-18t94o4 css-1dbjc4n r-1777fci r-1jayybb r-1ny4l3l r-o7ynqc r-6416eg r-13qz1uu']").click()
             except:
                 pass
             try:
                 self.driver.find_element_by_xpath(".//div[@class ='css-18t94o4 css-1dbjc4n r-1ny4l3l r-1j3t67a r-atwnbb r-o7ynqc r-6416eg']").click()
-                #time.sleep(1)
+                
             except:
                 pass
             a=self.driver.find_elements_by_xpath(".//article[contains(@class ,'css-1dbjc4n r-1loqt21')]")
             for e in a:
                 user=e.find_element_by_xpath(".//a[contains(@class ,'css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21')]").text
-                try:
-                    comment=e.find_element_by_xpath(".//div[contains(@class ,'css-901oao r-hkyrab r-1k78y06 r-a023e6')]").text
-                except:
-                    comment=e.find_element_by_xpath(".//div[@class ='css-901oao r-hkyrab r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0']").text
+                comment=e.find_element_by_xpath(".//div[@class ='css-901oao r-hkyrab r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0']").text
                 date=e.find_element_by_xpath(".//a[contains(@class ,'r-1re7ezh r-1loqt21 ')]").get_attribute("title")
                 dic={"user":user,"comment":comment,"date":date}
                 li.append(dic)
@@ -209,7 +214,6 @@ class TwitterDriver(Driver):
         WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.XPATH, ".//a[@class ='css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21 r-1wbh5a2 r-dnmrzs r-1ny4l3l']")))
         li=[]
         for i in range(scroll):
-            #self.driver.implicitly_wait(3)
             time.sleep(2)
             c=self.driver.find_elements_by_xpath(".//article[@class ='css-1dbjc4n r-1loqt21 r-18u37iz r-1ny4l3l r-o7ynqc r-6416eg']")
             for e in c:
@@ -233,29 +237,64 @@ class TwitterDriver(Driver):
             dic={str(word):li}
             result.append(dic)
         return(result)
-    def get_followers(self,user_id):
+    def get_followers(self,user_id,scroll):
+        self.driver.get("https://twitter.com/"+str(user_id)+"/followers")
+        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.XPATH, ".//div[@data-testid='UserCell']")))
+        
+        users=[]
+        for i in range(scroll):
+            time.sleep(1)
+            c=self.driver.find_elements_by_xpath(".//div[@class ='css-18t94o4 css-1dbjc4n r-1ny4l3l r-1j3t67a r-1w50u8q r-o7ynqc r-6416eg']")
+            for e in c:
+                user=e.find_element_by_xpath(".//div[@class ='css-1dbjc4n r-18u37iz r-1wbh5a2']").text
+                users.append(user)
+            try:
+                self.driver.execute_script("arguments[0].scrollIntoView();",c[len(c)-1])
+            except:
+                pass
+            
+        return(list(set(users)))
+    def get_following(self,user_id,scroll):
+        self.driver.get("https://twitter.com/"+str(user_id)+"/following")
+        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.XPATH, ".//div[@data-testid='UserCell']")))
+        
+        users=[]
+        for i in range(scroll):
+            time.sleep(2)
+            c=self.driver.find_elements_by_xpath(".//div[@class ='css-18t94o4 css-1dbjc4n r-1ny4l3l r-1j3t67a r-1w50u8q r-o7ynqc r-6416eg']")
+            for e in c:
+                user=e.find_element_by_xpath(".//div[@class ='css-1dbjc4n r-18u37iz r-1wbh5a2']").text
+                users.append(user)
+            try:
+                self.driver.execute_script("arguments[0].scrollIntoView();",c[len(c)-1])
+            except:
+                pass
+            
+        return(list(set(users)))
+    def get_images(self,user_id,scroll,nb_images):
         self.driver.get("https://twitter.com/"+str(user_id))
-        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.XPATH, ".//div[@class='css-901oao r-hkyrab r-1qd0xha r-1b6yd1w r-1vr29t4 r-ad9z0x r-bcqeeo r-qvutc0']")))
-        #c=self.driver.find_element_by_xpath(".//div[@class='css-1dbjc4n r-1habvwh']").text
-        name=self.driver.find_element_by_xpath(".//div[@class='css-901oao r-hkyrab r-1qd0xha r-1b6yd1w r-1vr29t4 r-ad9z0x r-bcqeeo r-qvutc0']").text
-        nb_tweets=self.driver.find_element_by_xpath(".//div[@class='css-901oao css-bfa6kz r-1re7ezh r-1qd0xha r-n6v787 r-16dba41 r-1sf4r6n r-bcqeeo r-qvutc0']").text
-        UserDescription=self.driver.find_element_by_xpath(".//div[@data-testid='UserDescription']").text
-        data=self.driver.find_element_by_xpath(".//div[@data-testid='UserProfileHeader_Items']").text
-        ss=self.driver.find_elements_by_xpath(".//div[@class='css-1dbjc4n r-18u37iz r-1w6e6rj']/div/a")
-        following=ss[0].get_attribute("title")
-        followers=ss[1].get_attribute("title")
-        img=self.driver.find_elements_by_xpath(".//img[@class='css-9pa8cd']")[1].get_attribute("src")
-        dic={
-            "name":name,
-            "nb_tweets":nb_tweets,
-            "user_description":UserDescription,
-            "data":data,
-            "following":following,
-            "followers":followers,
-            "image":img
-            }
-        self.user_info=dic
-        return(dic)
+        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.XPATH, ".//div[@class='css-1dbjc4n r-18u37iz r-1wtj0ep r-156q2ks r-1mdbhws']")))
+        urls=[]
+        li=[]
+        
+        for i in range(scroll):
+            time.sleep(2)
+            c=self.driver.find_elements_by_xpath(".//article[@class ='css-1dbjc4n r-1loqt21 r-18u37iz r-1ny4l3l r-o7ynqc r-6416eg']")
+            links = self.driver.find_elements_by_xpath("//a[@href]")
+            for link in links:
+                if 'photo' in link.get_attribute("href") and user_id in link.get_attribute("href"):
+                    li.append(link.get_attribute("href"))
+            urls+=li
+            try:
+                self.driver.execute_script("arguments[0].scrollIntoView();",c[len(c)-1])
+            except:
+                pass
+        urls=list(set(urls))
+        return(urls[:nb_images])
+        
+            
+            
+        
     
             
        
