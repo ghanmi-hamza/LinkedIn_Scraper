@@ -1577,3 +1577,90 @@ JavaScript error: resource://gre/modules/URIFixup.jsm, line 271: NS_ERROR_FAILUR
 
 ###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
 
+1600090358264	geckodriver	INFO	Listening on 127.0.0.1:51530
+1600090361354	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Hamza\\AppData\\Local\\Temp\\rust_mozprofileseoLyg"
+*** You are running in headless mode.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1600090367928	Marionette	INFO	Listening on port 51538
+1600090368200	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 271: NS_ERROR_FAILURE: Should pass a non-null uri
+1600090539195	Marionette	INFO	Stopped listening on port 51538
+1600090583699	geckodriver	INFO	Listening on 127.0.0.1:51690
+1600090586741	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Hamza\\AppData\\Local\\Temp\\rust_mozprofileCFRk5W"
+*** You are running in headless mode.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1600090593984	Marionette	INFO	Listening on port 51698
+1600090594090	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 271: NS_ERROR_FAILURE: Should pass a non-null uri
+1600090738171	Marionette	INFO	Stopped listening on port 51698
+1600090750358	geckodriver	INFO	Listening on 127.0.0.1:51821
+1600090753403	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Hamza\\AppData\\Local\\Temp\\rust_mozprofileWRHLpG"
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1600090764219	Marionette	INFO	Listening on port 51829
+1600090764605	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 271: NS_ERROR_FAILURE: Should pass a non-null uri
+JavaScript error: https://twitter.com/login, line 146: ChunkLoadError: Loading chunk 232 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.emoji.fr.2af5b5c5.js)
+JavaScript error: https://twitter.com/login, line 146: ChunkLoadError: Loading chunk 153 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/ondemand.BranchSdk.e3445e85.js)
+JavaScript error: https://twitter.com/INTE054/followers, line 143: ChunkLoadError: Loading chunk 15 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/shared~ondemand.EmojiPickerData~ondemand.EmojiPicker.3e673d75.js)
+JavaScript error: https://twitter.com/INTE054/followers, line 143: ChunkLoadError: Loading chunk 15 failed.
+(error: https://abs.twimg.com/responsive-web/client-web/shared~ondemand.EmojiPickerData~ondemand.EmojiPicker.3e673d75.js)
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+1600090901209	Marionette	INFO	Stopped listening on port 51829
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1600090906639	geckodriver	INFO	Listening on 127.0.0.1:51920
+1600090909739	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Hamza\\AppData\\Local\\Temp\\rust_mozprofilex6aBcW"
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1600090915883	Marionette	INFO	Listening on port 51929
+1600090916005	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 271: NS_ERROR_FAILURE: Should pass a non-null uri
+1600091277822	Marionette	INFO	Stopped listening on port 51929
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1600162481666	geckodriver	INFO	Listening on 127.0.0.1:49410
+1600162484746	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Hamza\\AppData\\Local\\Temp\\rust_mozprofilewsVBda"
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1600162496697	Marionette	INFO	Listening on port 49420
+1600162496861	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/modules/URIFixup.jsm, line 271: NS_ERROR_FAILURE: Should pass a non-null uri
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 143: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x59000E,name=PHttpBackgroundChannel::Msg___delete__) Channel error: cannot send/recv
+
+
+###!!! [Parent][MessageChannel] Error: (msgtype=0x59000E,name=PHttpBackgroundChannel::Msg___delete__) Channel error: cannot send/recv
+
+1600163447183	Marionette	INFO	Stopped listening on port 49420
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+

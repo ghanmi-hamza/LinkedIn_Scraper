@@ -1,17 +1,4 @@
-import time
-import pathlib 
-import json
-import click
-import urllib.request
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.firefox.options import Options
-from abc import ABC
+from .functions import *
 class Driver(ABC):
 
     def get_user_info(self,driver,url):
@@ -62,7 +49,6 @@ class TwitterDriver(Driver):
         """function that takes the user id and return info about it"""
         self.driver.get("https://twitter.com/"+str(user_id))
         WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.XPATH, ".//div[@class='css-901oao r-hkyrab r-1qd0xha r-1b6yd1w r-1vr29t4 r-ad9z0x r-bcqeeo r-qvutc0']")))
-        #c=self.driver.find_element_by_xpath(".//div[@class='css-1dbjc4n r-1habvwh']").text
         name=self.driver.find_element_by_xpath(".//div[@class='css-901oao r-hkyrab r-1qd0xha r-1b6yd1w r-1vr29t4 r-ad9z0x r-bcqeeo r-qvutc0']").text
         nb_tweets=self.driver.find_element_by_xpath(".//div[@class='css-901oao css-bfa6kz r-1re7ezh r-1qd0xha r-n6v787 r-16dba41 r-1sf4r6n r-bcqeeo r-qvutc0']").text
         UserDescription=self.driver.find_element_by_xpath(".//div[@data-testid='UserDescription']").text
@@ -92,6 +78,7 @@ class TwitterDriver(Driver):
         li=[]
         for i in range(scroll):
             time.sleep(2)
+            #list of publication
             c=self.driver.find_elements_by_xpath(".//article[@class ='css-1dbjc4n r-1loqt21 r-18u37iz r-1ny4l3l r-o7ynqc r-6416eg']")
             links = self.driver.find_elements_by_xpath("//a[@href]")
             for link in links:
@@ -161,6 +148,7 @@ class TwitterDriver(Driver):
                     self.driver.find_element_by_xpath(".//div[@class ='css-18t94o4 css-1dbjc4n r-1ny4l3l r-1j3t67a r-atwnbb r-o7ynqc r-6416eg']").click()
                 except:
                     pass
+                #list of comments
                 a=self.driver.find_elements_by_xpath(".//article[contains(@class ,'css-1dbjc4n r-1loqt21')]")
                 for e in a:
                     user=e.find_element_by_xpath(".//a[contains(@class ,'css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21')]").text
@@ -176,7 +164,7 @@ class TwitterDriver(Driver):
                     self.driver.execute_script("arguments[0].scrollIntoView();",a[len(a)-1])
                 except:
                     pass
-            result=list({v['user']:v for v in li}.values())[:n]
+            result=list({v['date']:v for v in li}.values())[:n]
             result_dic["comments"]=result
             return(result_dic)
         elif comments=="F":
@@ -196,6 +184,7 @@ class TwitterDriver(Driver):
                 
             except:
                 pass
+            #list of comments
             a=self.driver.find_elements_by_xpath(".//article[contains(@class ,'css-1dbjc4n r-1loqt21')]")
             for e in a:
                 user=e.find_element_by_xpath(".//a[contains(@class ,'css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21')]").text
@@ -215,6 +204,7 @@ class TwitterDriver(Driver):
         li=[]
         for i in range(scroll):
             time.sleep(2)
+            #list of comments
             c=self.driver.find_elements_by_xpath(".//article[@class ='css-1dbjc4n r-1loqt21 r-18u37iz r-1ny4l3l r-o7ynqc r-6416eg']")
             for e in c:
                 user=e.find_element_by_xpath(".//a[@class ='css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21 r-1wbh5a2 r-dnmrzs r-1ny4l3l']").text
@@ -243,7 +233,8 @@ class TwitterDriver(Driver):
         
         users=[]
         for i in range(scroll):
-            time.sleep(1)
+            time.sleep(2)
+            #list of followers
             c=self.driver.find_elements_by_xpath(".//div[@class ='css-18t94o4 css-1dbjc4n r-1ny4l3l r-1j3t67a r-1w50u8q r-o7ynqc r-6416eg']")
             for e in c:
                 user=e.find_element_by_xpath(".//div[@class ='css-1dbjc4n r-18u37iz r-1wbh5a2']").text
@@ -261,6 +252,7 @@ class TwitterDriver(Driver):
         users=[]
         for i in range(scroll):
             time.sleep(2)
+            #list of following
             c=self.driver.find_elements_by_xpath(".//div[@class ='css-18t94o4 css-1dbjc4n r-1ny4l3l r-1j3t67a r-1w50u8q r-o7ynqc r-6416eg']")
             for e in c:
                 user=e.find_element_by_xpath(".//div[@class ='css-1dbjc4n r-18u37iz r-1wbh5a2']").text
@@ -279,6 +271,7 @@ class TwitterDriver(Driver):
         
         for i in range(scroll):
             time.sleep(2)
+            #list of tweets
             c=self.driver.find_elements_by_xpath(".//article[@class ='css-1dbjc4n r-1loqt21 r-18u37iz r-1ny4l3l r-o7ynqc r-6416eg']")
             links = self.driver.find_elements_by_xpath("//a[@href]")
             for link in links:
