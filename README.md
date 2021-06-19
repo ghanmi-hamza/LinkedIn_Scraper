@@ -80,4 +80,4 @@ $ python __main.py__ --url="https://www.Twitter.com/profile/airdoggo/" --pubs="F
 
 License
 ----
-MIT
+Apache License 2.0
